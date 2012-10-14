@@ -14,9 +14,9 @@ package com.zerobyte.dao;
 import java.sql.*;
 
 public class Dao {
-	String sUrl;
-	String sUsername;
-	String uPassword;
+	String url;
+	String username;
+	String password;
 	Connection con = null;
 	Statement stmt = null;
 	ResultSet rs = null;
@@ -26,9 +26,9 @@ public class Dao {
 	 */
 	Dao( String url, String uname, String pw )
 	{
-		this.sUrl = url;
-		this.sUsername = uname;
-		this.uPassword = pw;
+		this.url = url;
+		this.username = uname;
+		this.password = pw;
 	}
 	
 	/*
@@ -39,7 +39,7 @@ public class Dao {
 	public boolean connect()
 	{
 		try {
-			con = DriverManager.getConnection( "jdbc:mysql://" + sUrl, sUsername, uPassword);
+			con = DriverManager.getConnection( "jdbc:mysql://" + url, username, password);
 		} catch (SQLException e) {
 			printExceptionError( e );
 		    return false;
