@@ -78,11 +78,10 @@ public class ScheduleListAdapter extends ArrayAdapter<ArrayList<ScheduleEvent>> 
 		int AndroidGreen = rsc.getColor(android.R.color.holo_green_dark);
 		int AndroidBlue = rsc.getColor(android.R.color.holo_blue_dark);
 
-		
 		for (int i = 0; i < 7; i++) {
-		final int pos = position;
-		final int ind = i;
-			
+			final int pos = position;
+			final int ind = i;
+
 			Button day_btn = null;
 			switch (i) {
 			case 0:
@@ -131,10 +130,13 @@ public class ScheduleListAdapter extends ArrayAdapter<ArrayList<ScheduleEvent>> 
 			day_btn.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					if (time_slots_data.get(pos).get(ind).getStatus() != 0) {
-						Intent displayEventIntent = new Intent(v.getContext(),
-								EventDisplayActivity.class);
-						((AndroidTabLayoutActivity) v.getContext())
-								.startActivity(displayEventIntent);
+						Intent displayEventIntent = new Intent(v.getContext(), EventDisplayActivity.class);
+						displayEventIntent.putIntegerArrayListExtra (
+								"events_viewed",
+								time_slots_data.get(pos).get(ind).getEventIds());
+						System.out.println("HAHA");
+						System.out.println(time_slots_data.get(pos).get(ind).getEventIds());
+						((AndroidTabLayoutActivity) v.getContext()).startActivity(displayEventIntent);
 					}
 				}
 
@@ -145,7 +147,8 @@ public class ScheduleListAdapter extends ArrayAdapter<ArrayList<ScheduleEvent>> 
 		return rowView;
 	}
 
-	public void update_schedule_data(HashMap<Integer, ScheduleEvent> schedule_data) {
+	public void update_schedule_data(
+			HashMap<Integer, ScheduleEvent> schedule_data) {
 		this.schedule_data = schedule_data;
 
 		notifyDataSetChanged();
